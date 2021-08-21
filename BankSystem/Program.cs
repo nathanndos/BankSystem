@@ -14,13 +14,14 @@ namespace BankSystem
 
             string nomeP, bancoP;
             double saldoP;
-            int idadeP, agenciaP, number, option=0;
+            int idadeP, agenciaP, number, option;
 
 
             ControleContas controleContas = new ControleContas();
 
             while (another == true)
             {
+                
                 Console.WriteLine("## Mini sistema ##\n");
                 Console.WriteLine("(1) Novo cadastro\n"+
                                 "(2) Buscar conta\n"+
@@ -29,13 +30,14 @@ namespace BankSystem
                                 "(5) Listar todos\n" +
                                 "(9) Sair\n");
                 try
-                {
+                {                
                     option = Convert.ToInt32(Console.ReadLine());
                 }
                 catch
                 {
-                    Console.Clear();  
-                    Console.WriteLine("Digite uma informação valida");
+                    Console.Clear();
+                    Console.WriteLine("Digite uma informação válida\n");
+                    option = -1;
                 }
 
                 switch (option)
@@ -63,6 +65,7 @@ namespace BankSystem
 
                             Console.WriteLine("\n## Ação finalizada ##");
                             Console.ReadLine();
+                            Console.Clear();
 
                         }
                     break;
@@ -105,7 +108,9 @@ namespace BankSystem
                             number = Convert.ToInt32(Console.ReadLine());
 
                             controleContas.EditAccount(number);
-                        }break;
+                            Console.Clear();
+                        }
+                        break;
 
                     case 4:
                         {
@@ -116,7 +121,9 @@ namespace BankSystem
                             controleContas.RemoveAccount(number);
 
                             Console.ReadLine();
-                        }break;
+                            Console.Clear();
+                        }
+                        break;
 
                     case 5:
                         {
@@ -134,6 +141,7 @@ namespace BankSystem
                             Console.WriteLine("\n** Fim das contas **");
                            
                             Console.ReadLine();
+                         
 
                         }
                         break;
@@ -143,7 +151,7 @@ namespace BankSystem
                         }
 
                 }
-                Console.Clear();
+            
             }
 
         }

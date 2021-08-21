@@ -44,9 +44,11 @@ namespace BankSystem
         public ContaCorrente(string nome, int idade, int agencia, string banco, double saldo )
         {
             Id++;
-            Titular = new Cliente();
-            Titular.Nome = nome;
-            Titular.Idade = idade;
+            Titular = new Cliente
+            {
+                Nome = nome,
+                Idade = idade
+            };
             Agencia = agencia;
             Banco = banco;
             Saldo = saldo;

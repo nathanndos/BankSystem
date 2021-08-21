@@ -90,6 +90,9 @@ namespace BankSystem
                                     "Digite o novo nome: ");
 
                                 corretAccount.Titular.Nome = Convert.ToString(Console.ReadLine());
+
+                                Console.WriteLine("\nAlteração concluída com sucesso!");
+                                Console.ReadLine();
                             }break;
                         case 2:
                             {
@@ -98,6 +101,9 @@ namespace BankSystem
                                     "Digite a nova idade: ");
 
                                 corretAccount.Titular.Idade = Convert.ToInt32(Console.ReadLine());
+
+                                Console.WriteLine("\nAlteração concluída com sucesso!");
+                                Console.ReadLine();
                             }
                             break;
                         case 3:
@@ -107,7 +113,11 @@ namespace BankSystem
                                     "Digite o numero da nova agencia: ");
 
                                 corretAccount.Agencia = Convert.ToInt32(Console.ReadLine());
-                            }break;
+
+                                Console.WriteLine("\nAlteração concluída com sucesso!");
+                                Console.ReadLine();
+                            }
+                            break;
                         case 4:
                             {
                                 Console.Clear();
@@ -115,6 +125,9 @@ namespace BankSystem
                                     "Digite o nome do novo Banco: ");
 
                                 corretAccount.Banco = Convert.ToString(Console.ReadLine());
+
+                                Console.WriteLine("\nAlteração concluída com sucesso!");
+                                Console.ReadLine();
                             }
                             break;
                         default:
