@@ -17,6 +17,9 @@ namespace BankSystem
             double saldoP;
             int idadeP, agenciaP;
 
+            List<int> inteiros = new List<int>();
+
+
             ControleContas controleContas = new ControleContas();
 
             while (another == true)
@@ -24,7 +27,7 @@ namespace BankSystem
                 Console.WriteLine("## Mini sistema ##\n");
                 Console.WriteLine("(1) Novo cadastro\n"+
                                 "(2) Buscar conta\n"+
-                                "(3) Editar tttconta\n" +
+                                "(3) Editar conta\n" +
                                 "(4) Excluir conta\n" +
                                 "(5) Listar todos\n" +
                                 "(9) Sair\n");
@@ -52,24 +55,67 @@ namespace BankSystem
                             saldoP = Convert.ToDouble(Console.ReadLine());
 
 
-                           controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
+                            controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
 
                         }
                     break;
                     case 2:
                         {
+                            int number = 0;
+
+                            do
+                            {
+                                Console.Clear();
+                                Console.WriteLine("## Busca de conta corrente");
+
+                                Console.WriteLine("Digite o numero da conta desejada: ");
+                                number = Convert.ToInt32(Console.ReadLine());
+
+                                controleContas.SearchAccount(number);
+
+                                Console.WriteLine("\nDeseja fazer uma nova Busca? Nao(0) Sim(1)");
+                                try
+                                {
+                                    number = Convert.ToInt32(Console.ReadLine());
+                                }
+                                catch
+                                {
+                                    number = 0;
+                                }
+                                
+                                if (number == 0)
+                                {
+                                    break;
+                                }
+
+                            } while (number == 1);
+
+
+                        }
+                        break;
+                    case 3:
+                        {
+
+                        }break;
+                    case 4:
+                        {
+
+                        }break;
+                    case 5:
+                        {
                             Console.Clear();
                             Console.WriteLine("## Contas correntes cadastradas ##\n");
                             foreach (ContaCorrente contaCorrente in controleContas.ContasCorrentes)
                             {
-                                Console.WriteLine("Id: " + contaCorrente.NumConta
-                                                    +"\nNome: " + contaCorrente.Titular.Nome+
-                                                   "\nIdade: " + contaCorrente.Titular.Idade+
-                                                   "\nAgencia: " + contaCorrente.Agencia+
-                                                   "\nBanco: "+ contaCorrente.Banco +
-                                                   "\nSaldo: R$"+ contaCorrente.Saldo+"\n -----------------\n");
+                                Console.WriteLine("Numero da conta: " + contaCorrente.NumConta
+                                                    + "\nNome: " + contaCorrente.Titular.Nome +
+                                                   "\nIdade: " + contaCorrente.Titular.Idade +
+                                                   "\nAgencia: " + contaCorrente.Agencia +
+                                                   "\nBanco: " + contaCorrente.Banco +
+                                                   "\nSaldo: R$" + contaCorrente.Saldo + "\n -----------------\n");
                             }
                             Console.WriteLine("\n** Fim das contas **");
+                           
                             Console.ReadLine();
 
                         }
