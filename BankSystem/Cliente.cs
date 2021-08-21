@@ -24,7 +24,6 @@ namespace BankSystem
                 _idade = value;
             }
         }
-
      
     }
 }

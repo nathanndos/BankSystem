@@ -14,7 +14,7 @@ namespace BankSystem
 
             string nomeP, bancoP;
             double saldoP;
-            int idadeP, agenciaP, number, option;
+            int idadeP, agenciaP, number, option=0;
 
 
             ControleContas controleContas = new ControleContas();
@@ -28,7 +28,15 @@ namespace BankSystem
                                 "(4) Excluir conta\n" +
                                 "(5) Listar todos\n" +
                                 "(9) Sair\n");
-                option = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    option = Convert.ToInt32(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.Clear();  
+                    Console.WriteLine("Digite uma informação valida");
+                }
 
                 switch (option)
                 {
@@ -52,6 +60,9 @@ namespace BankSystem
                             saldoP = Convert.ToDouble(Console.ReadLine());
 
                             controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
+
+                            Console.WriteLine("\n## Ação finalizada ##");
+                            Console.ReadLine();
 
                         }
                     break;
@@ -89,7 +100,11 @@ namespace BankSystem
                         break;
                     case 3:
                         {
+                            Console.Clear();
+                            Console.WriteLine("Qual conta deseja editar? ");
+                            number = Convert.ToInt32(Console.ReadLine());
 
+                            controleContas.EditAccount(number);
                         }break;
 
                     case 4:
@@ -126,10 +141,9 @@ namespace BankSystem
                         {
                             return;
                         }
+
                 }
                 Console.Clear();
-                Console.WriteLine("\n## Ação finalizada ##\n");          
-
             }
 
         }
