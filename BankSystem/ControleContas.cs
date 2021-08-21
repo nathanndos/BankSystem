@@ -32,9 +32,30 @@ namespace BankSystem
                                                    "\nAgencia: " + corretAccount.Agencia +
                                                    "\nBanco: " + corretAccount.Banco +
                                                    "\nSaldo: R$" + corretAccount.Saldo + "\n -----------------\n");
-            }
+            }    
+        }
+        public void RemoveAccount(int numAccount)
+        {
+            try
+            {
+                ContaCorrente corretAccount = ContasCorrentes.Find(i => i.NumConta == numAccount);
 
-            
+                if (corretAccount == null)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error! Não foi possível encontrar esse conta");
+                }
+                else
+                {
+                    ContasCorrentes.Remove(corretAccount);
+                    Console.WriteLine("Removido com sucesso");
+                }
+                
+            }
+            catch
+            {
+                Console.WriteLine("Ocorreu um erro! Tente novamente");
+            }
         }
     }
 }

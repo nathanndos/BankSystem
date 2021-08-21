@@ -11,13 +11,10 @@ namespace BankSystem
         static void Main(string[] args)
         {
             bool another = true;
-            int option ;
 
             string nomeP, bancoP;
             double saldoP;
-            int idadeP, agenciaP;
-
-            List<int> inteiros = new List<int>();
+            int idadeP, agenciaP, number, option;
 
 
             ControleContas controleContas = new ControleContas();
@@ -54,15 +51,12 @@ namespace BankSystem
                             Console.WriteLine("Qual o saldo inicial? ");
                             saldoP = Convert.ToDouble(Console.ReadLine());
 
-
                             controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
 
                         }
                     break;
                     case 2:
-                        {
-                            int number = 0;
-
+                        {                         
                             do
                             {
                                 Console.Clear();
@@ -97,10 +91,18 @@ namespace BankSystem
                         {
 
                         }break;
+
                     case 4:
                         {
+                            Console.Clear();
+                            Console.WriteLine("Qual o numero da conta que deseja excluir? ");
+                            number = Convert.ToInt32(Console.ReadLine());
 
+                            controleContas.RemoveAccount(number);
+
+                            Console.ReadLine();
                         }break;
+
                     case 5:
                         {
                             Console.Clear();
@@ -120,6 +122,10 @@ namespace BankSystem
 
                         }
                         break;
+                    case 9:
+                        {
+                            return;
+                        }
                 }
                 Console.Clear();
                 Console.WriteLine("\n## Ação finalizada ##\n");          
