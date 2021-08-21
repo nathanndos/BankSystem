@@ -24,7 +24,7 @@ namespace BankSystem
                 Console.WriteLine("## Mini sistema ##\n");
                 Console.WriteLine("(1) Novo cadastro\n"+
                                 "(2) Buscar conta\n"+
-                                "(3) Editar conta\n" +
+                                "(3) Editar tttconta\n" +
                                 "(4) Excluir conta\n" +
                                 "(5) Listar todos\n" +
                                 "(9) Sair\n");
