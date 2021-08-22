@@ -22,7 +22,23 @@ namespace BankSystem
             }
         }
 
-        public int Agencia { get; set; }
+        private int _agencia;
+        public int Agencia { 
+            get {
+                return _agencia;
+            } 
+            set { 
+                if(value < 0)
+                {
+                    _agencia = 000;
+                }
+                else
+                {
+                    _agencia = value;
+                }
+                
+            }
+        }
         public string Banco { get; set; }
         private double _saldo = 0;
         public double Saldo

@@ -12,6 +12,7 @@ namespace BankSystem
 
         public ControleContas()
         {
+            
             ContasCorrentes = new List<ContaCorrente>();        
         }
 

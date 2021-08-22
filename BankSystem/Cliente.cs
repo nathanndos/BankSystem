@@ -8,7 +8,26 @@ namespace BankSystem
 {
     public class Cliente
     {
-        public string Nome { get; set; }
+        private string _nome;
+        public string Nome
+        {
+            get
+            {
+                return _nome;
+            }
+            set
+            {
+                if (value.Length<3||value=="") {
+                    _nome = "Conta inválida";
+                }
+                else
+                {
+                    _nome = value;
+                }
+            }
+        }
+
+
         private int _idade;
         public int Idade
         {
@@ -18,7 +37,7 @@ namespace BankSystem
             }
             set
             {
-                if (value < 18) {
+                if (value < 16) {
                     return;
                 }
                 _idade = value;
