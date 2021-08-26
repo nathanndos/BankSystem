@@ -12,17 +12,13 @@ namespace BankSystem
         static void Main(string[] args)
         {
             bool another = true;
-
-            string nomeP, bancoP;
-            double saldoP;
-            int idadeP, agenciaP, number, option;
-
+            int number;
+            int option;
 
             ControleContas controleContas = new ControleContas();
 
             while (another == true)
             {
-                
                 Console.WriteLine("## Mini sistema ##\n");
                 Console.WriteLine("(1) Novo cadastro\n"+
                                 "(2) Buscar conta\n"+
@@ -45,15 +41,78 @@ namespace BankSystem
                 {
                     case 1:
                         {
+                            bool somenteLetras = false;
+                            bool validaIdade = false;
+                            int idadeP = 0, agenciaP = 0;
+                            string nomeP, bancoP;
+                            double saldoP;
+
                             try
                             {
+                                
                                 Console.Clear();
-                                Console.WriteLine("## Cadastro novo cliente ##");
-                                Console.WriteLine("Informe o nome do cliente: ");
-                                nomeP = Convert.ToString(Console.ReadLine());
+                                Console.WriteLine(idadeP);
+                                do
+                                {
+                                    Console.WriteLine("## Cadastro novo cliente ##\n");
 
-                                Console.WriteLine("Informe a idade: ");
-                                idadeP = Convert.ToInt32(Console.ReadLine());
+                                    Console.Write("Informe o primeiro nome do cliente: ");
+                                    nomeP = Convert.ToString(Console.ReadLine());
+                                    for (int i = 0; i < nomeP.Length; i++)
+                                    {
+                                        if (char.IsLetter(nomeP[i]))
+                                        {
+                                            somenteLetras = true;
+                                        }
+                                        else
+                                        {
+                                            somenteLetras = false;
+                                            Console.Clear();
+                                            Console.WriteLine("** Nao sao permitidos números ou caracteres especiais no nome **\n");                                        
+                                            break;
+                                        }
+                                    }
+                                    if (nomeP.Length < 3 && somenteLetras == true)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("** O nome deve ter no mínimo 3 caracteres **\n");
+                                    }
+
+                                } while (somenteLetras == false || nomeP.Length < 3);
+
+                                Console.Clear();
+                                do
+                                {
+                                    idadeP = 0;
+
+                                    Console.WriteLine("## Cadastro novo cliente ##\n");
+
+                                    Console.Write("Informe a idade(somente valores númericos): ");
+
+                                    try
+                                    {
+                                        idadeP = Convert.ToInt32(Console.ReadLine());
+                                        if (idadeP < 16)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("Não é permitido abertura de conta corrente para menores de 16 anos\n");
+                                        }
+                                        else if (idadeP > 120)
+                                        {
+                                            Console.WriteLine("O valor da idade deve estar entre o intervalo de 16 anos - 120 anos");
+                                        }
+                                        else { 
+                                            validaIdade = true;
+                                        }
+                                        
+                                    }
+                                    catch
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Digite Apenas valores numericos\n");
+                                    }
+
+                                } while (validaIdade!=true);                         
 
                                 Console.WriteLine("Apresenta a agencia: ");
                                 agenciaP = Convert.ToInt32(Console.ReadLine());
@@ -63,7 +122,7 @@ namespace BankSystem
 
                                 Console.WriteLine("Qual o saldo inicial? ");
                                 saldoP = Convert.ToDouble(Console.ReadLine());
-
+                                /*
                                 if (idadeP <0||agenciaP<0||saldoP<0)
                                 {
                                     Console.Clear();
@@ -77,8 +136,9 @@ namespace BankSystem
                                 else
                                 {
                                     controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
-                                }
-                           
+                                }*/
+                                controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
+
                             }
                             catch
                             {
@@ -91,9 +151,6 @@ namespace BankSystem
                                 Console.ReadLine();
                                 Console.Clear();
                             }
-
-
-
                         }
                     break;
                     case 2:
