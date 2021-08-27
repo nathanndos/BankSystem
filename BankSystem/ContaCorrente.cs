@@ -22,15 +22,15 @@ namespace BankSystem
             }
         }
 
-        private int _agencia;
-        public int Agencia { 
+        private string _agencia;
+        public string Agencia { 
             get {
                 return _agencia;
             } 
             set { 
-                if(value < 0)
+                if(value == "")
                 {
-                    _agencia = 000;
+                    _agencia = "001";
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace BankSystem
             }
         }
 
-        public ContaCorrente(string nome, int idade, int agencia, string banco, double saldo )
+        public ContaCorrente(string nome, int idade, string agencia, string banco, double saldo )
         {
             Id++;
             Titular = new Cliente

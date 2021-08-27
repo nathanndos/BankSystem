@@ -27,7 +27,8 @@ namespace BankSystem
                                 "(5) Listar todos\n" +
                                 "(9) Sair\n");
                 try
-                {                
+                {
+                    Console.Write("Indice da pesquisa: ");
                     option = Convert.ToInt32(Console.ReadLine());
                 }
                 catch
@@ -41,17 +42,15 @@ namespace BankSystem
                 {
                     case 1:
                         {
-                            bool somenteLetras = false;
-                            bool validaIdade = false;
-                            int idadeP = 0, agenciaP = 0;
-                            string nomeP, bancoP;
+                            bool validador = false, somenteLetras = false, validaIdade = false;
+                            int idadeP = 0, validadorNumerico = 0;
+                            string nomeP, bancoP, agenciaP = "";
                             double saldoP;
 
                             try
                             {
                                 
                                 Console.Clear();
-                                Console.WriteLine(idadeP);
                                 do
                                 {
                                     Console.WriteLine("## Cadastro novo cliente ##\n");
@@ -79,6 +78,7 @@ namespace BankSystem
                                     }
 
                                 } while (somenteLetras == false || nomeP.Length < 3);
+                                    
 
                                 Console.Clear();
                                 do
@@ -86,7 +86,6 @@ namespace BankSystem
                                     idadeP = 0;
 
                                     Console.WriteLine("## Cadastro novo cliente ##\n");
-
                                     Console.Write("Informe a idade(somente valores númericos): ");
 
                                     try
@@ -99,6 +98,7 @@ namespace BankSystem
                                         }
                                         else if (idadeP > 120)
                                         {
+                                            Console.Clear();
                                             Console.WriteLine("O valor da idade deve estar entre o intervalo de 16 anos - 120 anos");
                                         }
                                         else { 
@@ -112,38 +112,91 @@ namespace BankSystem
                                         Console.WriteLine("Digite Apenas valores numericos\n");
                                     }
 
-                                } while (validaIdade!=true);                         
+                                } while (validaIdade!=true);
 
-                                Console.WriteLine("Apresenta a agencia: ");
-                                agenciaP = Convert.ToInt32(Console.ReadLine());
+                                Console.Clear();
+                                do
+                                {
+                                    Console.WriteLine("## Cadastro novo cliente ##\n");
+                                    Console.Write("Digite o numero da agencia: ");
+                                    try
+                                    {
+                                        agenciaP = Convert.ToString(Console.ReadLine());
 
-                                Console.WriteLine("Qual o banco? ");
+                                        if (agenciaP.Length!=3)
+                                        {
+                                            Console.Clear();
+                                            Console.WriteLine("A agencia deve ter exatamente 3 numeros\n");
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < agenciaP.Length; i++)
+                                            {
+                                                if (!char.IsNumber(agenciaP[i]))
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("** Entre apenas com valores numéricos**\n");
+                                                    validador = false;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    validador = true;
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                    catch
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Error. Digite Apenas valores válidos\n");
+                                    }
+
+                                } while (validador!=true);
+
+                                validador = false;
+              
+                                Console.Write("Qual o banco? ");
                                 bancoP = Convert.ToString(Console.ReadLine());
 
-                                Console.WriteLine("Qual o saldo inicial? ");
+                                Console.Write("Qual o saldo inicial? ");
                                 saldoP = Convert.ToDouble(Console.ReadLine());
-                                /*
-                                if (idadeP <0||agenciaP<0||saldoP<0)
+
+                                Console.Clear();
+                                Console.WriteLine("---- Pré-visualização do cadastro----");
+
+                                Console.WriteLine("\nNome: " + nomeP +
+                                                   "\nIdade: " + idadeP +
+                                                   "\nAgencia: " + agenciaP +
+                                                   "\nBanco: " + bancoP +
+                                                   "\nSaldo: R$" + saldoP + "\n");
+
+                                Console.WriteLine("Deseja confirmar o cadastro? Nao(0) Sim(1)");
+                                validadorNumerico = Convert.ToInt32(Console.ReadLine());
+
+                                if (validadorNumerico != 1 )
                                 {
-                                    Console.Clear();
-                                    Console.WriteLine("## Cadastro não realizado ##\nUma ou mais informações estão incorretas\n");
-                                }
-                                else if (nomeP.Length < 3||nomeP=="")
-                                {
-                                    Console.Clear();
-                                    Console.WriteLine("## Cadastro não realizado ##\nO Nome deve ter mais de 3 caracteres\n");
+                                    Console.WriteLine("\n-- Cadastro cancelado! --");
                                 }
                                 else
                                 {
+                                    Console.Clear();
                                     controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
-                                }*/
-                                controleContas.ContasCorrentes.Add(new ContaCorrente(nomeP, idadeP, agenciaP, bancoP, saldoP));
-
+                                    Console.WriteLine("--Cliente cadastrado com sucesso!--\n");
+                                    Console.WriteLine("Número da conta: " + controleContas.ContasCorrentes.Last().NumConta +
+                                                    "\nNome: " + nomeP +
+                                                   "\nIdade: " + idadeP +
+                                                   "\nAgencia: " + agenciaP +
+                                                   "\nBanco: " + bancoP +
+                                                   "\nSaldo: R$" + saldoP + "\n");
+                                }
+                              
                             }
                             catch
                             {
                                 Console.Clear();
-                                Console.WriteLine("Ocorreu um erro. Informe informações válidas");
+                                Console.WriteLine("Ocorreu um erro inesperado. Voltando ao menu principal...");
                             }
                             finally
                             {
@@ -262,8 +315,7 @@ namespace BankSystem
                                                        "\nSaldo: R$" + contaCorrente.Saldo + "\n -----------------\n");
                                 }
                                 Console.WriteLine("\n** Fim das contas **");
-                            }
-                            
+                            }          
                            
                             Console.ReadLine();
                             Console.Clear();

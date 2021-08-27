@@ -11,8 +11,7 @@ namespace BankSystem
         public List<ContaCorrente> ContasCorrentes { get; set; }
 
         public ControleContas()
-        {
-            
+        {          
             ContasCorrentes = new List<ContaCorrente>();        
         }
 
@@ -113,7 +112,7 @@ namespace BankSystem
                                 Console.WriteLine("## Alteração de Agencia ##\n\n" +
                                     "Digite o numero da nova agencia: ");
 
-                                corretAccount.Agencia = Convert.ToInt32(Console.ReadLine());
+                                corretAccount.Agencia = Convert.ToString(Console.ReadLine());
 
                                 Console.WriteLine("\nAlteração concluída com sucesso!");
                                 Console.ReadLine();
