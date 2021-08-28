@@ -49,8 +49,9 @@ namespace BankSystem
             }
             set
             {
-                if (value < 0)
+                if (value < 0 )
                 {
+                    _saldo = 0;
                     return;
                 }
                 _saldo = value;

@@ -45,7 +45,7 @@ namespace BankSystem
                             bool validador = false, somenteLetras = false, validaIdade = false;
                             int idadeP = 0, validadorNumerico = 0;
                             string nomeP, bancoP, agenciaP = "";
-                            double saldoP;
+                            double saldoP = 0;
 
                             try
                             {
@@ -62,6 +62,7 @@ namespace BankSystem
                                         if (char.IsLetter(nomeP[i]))
                                         {
                                             somenteLetras = true;
+                                            nomeP = nomeP.ToUpper();
                                         }
                                         else
                                         {
@@ -155,13 +156,61 @@ namespace BankSystem
 
                                 } while (validador!=true);
 
-                                validador = false;
-              
-                                Console.Write("Qual o banco? ");
-                                bancoP = Convert.ToString(Console.ReadLine());
+                                
+                                somenteLetras = false;
+                                Console.Clear();
+                                do
+                                {
+                                    Console.WriteLine("## Cadastro novo cliente ##\n");
+                                    Console.Write("Qual o banco? ");
+                                    bancoP = Convert.ToString(Console.ReadLine());
 
-                                Console.Write("Qual o saldo inicial? ");
-                                saldoP = Convert.ToDouble(Console.ReadLine());
+                                    for (int i = 0; i < bancoP.Length; i++)
+                                    {
+                                        if (char.IsLetter(bancoP[i]))
+                                        {
+                                            somenteLetras = true;
+                                            bancoP = bancoP.ToUpper();
+                                        }
+                                        else
+                                        {
+                                            somenteLetras = false;
+                                            Console.Clear();
+                                            Console.WriteLine("** Nao sao permitidos números ou caracteres especiais no nome  do banco**\n");
+                                            break;
+                                        }
+                                    }
+                                    if (bancoP.Length < 3 && somenteLetras == true)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("** O nome do banco deve ter no mínimo 3 caracteres **\n");
+                                    }
+
+                                } while (somenteLetras == false||bancoP.Length <3);
+
+                                Console.Clear();
+                                validador = false;
+
+                                do
+                                {
+                                    Console.WriteLine("## Cadastro novo cliente ##\n");
+                                    Console.WriteLine("Obs.:Qualquer  valor negativo informado será automaticamente considerado como zero");
+                                    Console.Write("Qual o saldo inicial? ");
+                                    try
+                                    {
+                                        saldoP = Math.Round(Convert.ToDouble(Console.ReadLine()),2);
+                                        if (saldoP < 0) saldoP = 0;
+                                        validador = true;
+
+                                    }
+                                    catch
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Error. Digite Apenas valores numericos\n");
+                                        validador = false;
+
+                                    }
+                                } while (validador == false);
 
                                 Console.Clear();
                                 Console.WriteLine("---- Pré-visualização do cadastro----");
@@ -238,6 +287,7 @@ namespace BankSystem
                                 }
                                 catch
                                 {
+                                    Console.Clear();
                                     number = 0;
                                 }
                                 
